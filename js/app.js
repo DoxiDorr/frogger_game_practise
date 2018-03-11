@@ -1,7 +1,20 @@
 // global values
 
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
+var canvas = document.getElementById("canvas");
+var ctx = canvas.getContext("2d");
+
+// set up game character
+
+var frog = new Image(); frog.src = "pictures/frogger.jpeg";
+
+var sx = 0;
+var sy = 0;
+var swidth = 40;
+var sheight = 40;
+var x = 50;
+var y = 444;
+var width = 30;
+var height = 30;
 
 // central function to draw canvas again and again
 
@@ -44,11 +57,17 @@ function drawBackground() {
 
 };
 
+// function to draw the game character
+
+function drawFrog() {
+  ctx.drawImage(person, sx, sy, swidth, sheight, x, y, width, height);
+}
+
 // function to call drawBackground
 
 function draw () {
   drawBackground();
-
+  drawFrog();
   requestAnimationFrame(draw);
 }
 draw();
