@@ -5,7 +5,7 @@ var ctx = canvas.getContext("2d");
 
 // set up game character
 
-var frog = new Image(); frog.src = "pictures/frogger.jpeg";
+var frog = new Image(); frog.src = "pictures/char-boy.png";
 
 var sx = 0;
 var sy = 0;
@@ -60,7 +60,7 @@ function drawBackground() {
 // function to draw the game character
 
 function drawFrog() {
-  ctx.drawImage(person, sx, sy, swidth, sheight, x, y, width, height);
+  ctx.drawImage(frog, sx, sy, swidth, sheight, x, y, width, height);
 }
 
 // function to call drawBackground
