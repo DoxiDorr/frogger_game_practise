@@ -15,6 +15,39 @@ var y = 444;
 var width = 30;
 var height = 30;
 
+// set up boolean variables for pressed buttons
+
+var rightPressed = false;
+var leftPressed = false;
+var upPressed = false;
+var downPressed = false;
+var up = true;
+var down = true;
+var right = true;
+var left = true;
+
+// set up event listener to listen for a press on a button
+
+document.addEventListener("keydown", keyDownHandler, false);
+document.addEventListener("keyup", keyUpHandler, false);
+
+// central function to handle the event listener
+
+function keyDownHandler(e) {
+  if(e.keyCode == 39) {rightPressed = true;}
+  if(e.keyCode == 37) {leftPressed = true;}
+  if(e.keyCode == 38) {upPressed = true;}
+  if(e.keyCode == 40) {downPressed = true;}
+}
+
+
+function keyUpHandler(e) {
+  if(e.keyCode == 39) {rightPressed = false;}
+  if(e.keyCode == 37) {leftPressed = false;}
+  if(e.keyCode == 38) {upPressed = false;}
+  if(e.keyCode == 40) {downPressed = false;}
+}
+
 // central function to draw canvas again and again
 
 function drawBackground() {
@@ -64,8 +97,18 @@ function drawFrog() {
 // function to call drawBackground
 
 function draw () {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawBackground();
   drawFrog();
+
+  if (upPressed == true && up == true) {
+    y = y - 44;
+    up = false;
+  }
+  if (upPressed == false) {
+    up = true;
+  }
+
 
   requestAnimationFrame(draw);
 }
