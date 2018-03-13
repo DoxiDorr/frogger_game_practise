@@ -101,12 +101,44 @@ function draw () {
   drawBackground();
   drawFrog();
 
+  // element to move frog upwards
+
   if (upPressed == true && up == true) {
     y = y - 44;
     up = false;
   }
   if (upPressed == false) {
     up = true;
+  }
+
+  // element to move frog backwards
+
+  if (downPressed == true && down == true) {
+    y = y + 44;
+    down = false;
+  }
+  if (downPressed == false) {
+    down = true;
+  }
+
+  // element to move frog to the right
+
+  if (rightPressed == true && right == true) {
+    x = x + 44;
+    right = false;
+  }
+  if (rightPressed == false) {
+    right = true;
+  }
+
+  // element to move frog to the left
+
+  if (leftPressed == true && left == true) {
+    x = x - 44;
+    left = false;
+  }
+  if (leftPressed == false) {
+    left = true;
   }
 
 
