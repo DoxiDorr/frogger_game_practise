@@ -26,6 +26,14 @@ var down = true;
 var right = true;
 var left = true;
 
+// variables for moving the cars
+
+var carX1 = 100;
+
+// variable car and linked picture
+
+var car = new Image(); car.src = "froggercars.png";
+
 // set up event listener to listen for a press on a button
 
 document.addEventListener("keydown", keyDownHandler, false);
@@ -94,54 +102,64 @@ function drawFrog() {
   ctx.drawImage(frog, sx, sy, swidth, sheight, x, y, width, height);
 }
 
+function moveFrog() {
+
+    // element to move frog upwards
+
+    if (upPressed == true && up == true) {
+      y = y - 44;
+      up = false;
+    }
+    if (upPressed == false) {
+      up = true;
+    }
+
+    // element to move frog backwards
+
+    if (downPressed == true && down == true) {
+      y = y + 44;
+      down = false;
+    }
+    if (downPressed == false) {
+      down = true;
+    }
+
+    // element to move frog to the right
+
+    if (rightPressed == true && right == true) {
+      x = x + 44;
+      right = false;
+    }
+    if (rightPressed == false) {
+      right = true;
+    }
+
+    // element to move frog to the left
+
+    if (leftPressed == true && left == true) {
+      x = x - 44;
+      left = false;
+    }
+    if (leftPressed == false) {
+      left = true;
+    }
+
+}
+
+// function to draw cars
+
+function drawCars () {
+  ctx.drawImage(car, 0, 0, 60, 35, carX1, 400, 60, 35);
+}
+
 // function to call drawBackground
 
 function draw () {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawBackground();
   drawFrog();
-
-  // element to move frog upwards
-
-  if (upPressed == true && up == true) {
-    y = y - 44;
-    up = false;
-  }
-  if (upPressed == false) {
-    up = true;
-  }
-
-  // element to move frog backwards
-
-  if (downPressed == true && down == true) {
-    y = y + 44;
-    down = false;
-  }
-  if (downPressed == false) {
-    down = true;
-  }
-
-  // element to move frog to the right
-
-  if (rightPressed == true && right == true) {
-    x = x + 44;
-    right = false;
-  }
-  if (rightPressed == false) {
-    right = true;
-  }
-
-  // element to move frog to the left
-
-  if (leftPressed == true && left == true) {
-    x = x - 44;
-    left = false;
-  }
-  if (leftPressed == false) {
-    left = true;
-  }
-
-
+  moveFrog();
+  drawCars();
   requestAnimationFrame(draw);
 }
 draw();
