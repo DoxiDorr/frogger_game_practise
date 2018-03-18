@@ -29,6 +29,7 @@ var left = true;
 // variables for moving the cars
 
 var carX1 = 100;
+var carSX1 = 0;
 
 // variable car and linked picture
 
@@ -106,7 +107,7 @@ function moveFrog() {
 
     // element to move frog upwards
 
-    if (upPressed == true && up == true) {
+    if (upPressed == true && up == true && y > 240) {
       y = y - 44;
       up = false;
     }
@@ -116,7 +117,7 @@ function moveFrog() {
 
     // element to move frog backwards
 
-    if (downPressed == true && down == true) {
+    if (downPressed == true && down == true && y + height < canvas.height - 80) {
       y = y + 44;
       down = false;
     }
@@ -126,7 +127,7 @@ function moveFrog() {
 
     // element to move frog to the right
 
-    if (rightPressed == true && right == true) {
+    if (rightPressed == true && right == true && x + width < canvas.width -20) {
       x = x + 44;
       right = false;
     }
@@ -136,7 +137,7 @@ function moveFrog() {
 
     // element to move frog to the left
 
-    if (leftPressed == true && left == true) {
+    if (leftPressed == true && left == true && x > 20) {
       x = x - 44;
       left = false;
     }
@@ -149,7 +150,14 @@ function moveFrog() {
 // function to draw cars
 
 function drawCars () {
-  ctx.drawImage(car, 0, 0, 60, 35, carX1, 400, 60, 35);
+  ctx.drawImage(car, carSX1, 0, 60, 35, carX1, 400, 60, 35);
+  if (carX1 < canvas.width + 100) {
+    carX1 = carX1 +5;
+  }
+  else {
+    carX1 = -100;
+    carSX1 = (Math.floor(Math.random() *4)) *60;
+  }
 }
 
 // function to call drawBackground
