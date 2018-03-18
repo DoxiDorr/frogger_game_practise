@@ -30,6 +30,16 @@ var left = true;
 
 var carX1 = 100;
 var carSX1 = 0;
+var carY1 = 400;
+var carWidth = 60;
+var carHeight = 35;
+var carX2 = 500;
+var carSX2 = 60;
+var carY2 = 400;
+var carX3 = 460;
+var carSX3 = 120;
+var carY3 = 355;
+
 
 // variable car and linked picture
 
@@ -150,7 +160,16 @@ function moveFrog() {
 // function to draw cars
 
 function drawCars () {
-  ctx.drawImage(car, carSX1, 0, 60, 35, carX1, 400, 60, 35);
+
+  var carsSX = [carSX1, carSX2, carSX3];
+  var carsX = [carX1, carX2, carX3];
+  var carsY = [carY1, carY2, carY3];
+
+  for (i = 0; i < carsX.length; i++) {
+    ctx.drawImage(car, carsSX[i], 0, 60, 35, carsX[i], carsY[i], carWidth, carHeight);
+  }
+
+
   if (carX1 < canvas.width + 100) {
     carX1 = carX1 +5;
   }
@@ -158,6 +177,31 @@ function drawCars () {
     carX1 = -100;
     carSX1 = (Math.floor(Math.random() *4)) *60;
   }
+
+  if (carX2 < canvas.width + 100) {
+    carX2 = carX2 +5;
+  }
+  else {
+    carX2 = -100;
+    carSX2 = (Math.floor(Math.random() *4)) *60;
+  }
+}
+
+// function to implement collision
+
+function runOver () {
+
+  var carsX = [carX1, carX2];
+  var carsY = [carY1, carY2];
+
+  for (i = 0; i < carsX.length; i++) {
+    if (carsX[i] <= x + width &&
+    carsX[i] + carWidth >=  x &&
+    carsY[i] + carHeight >= y &&
+    carsY[i] <= y + height) {
+      y = 450;
+  }
+}
 }
 
 // function to call drawBackground
@@ -168,6 +212,7 @@ function draw () {
   drawFrog();
   moveFrog();
   drawCars();
+  runOver();
   requestAnimationFrame(draw);
 }
 draw();
