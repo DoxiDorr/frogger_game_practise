@@ -39,7 +39,21 @@ var carY2 = 400;
 var carX3 = 460;
 var carSX3 = 120;
 var carY3 = 355;
-
+var carX4 = 400;
+var carSX4 = 180;
+var carY4 = 310;
+var carX5 = 360;
+var carSX5 = 0;
+var carY5 = 265;
+var carX6 = 60;
+var carSX6 = 120;
+var carY6 = 355;
+var carX7 = 100;
+var carSX7 = 180;
+var carY7 = 310;
+var carX8 = 160;
+var carSX8 = 0;
+var carY8 = 265;
 
 // variable car and linked picture
 
@@ -161,15 +175,20 @@ function moveFrog() {
 
 function drawCars () {
 
-  var carsSX = [carSX1, carSX2, carSX3];
-  var carsX = [carX1, carX2, carX3];
-  var carsY = [carY1, carY2, carY3];
+  var carsSX = [carSX1, carSX2, carSX3, carSX4, carSX5, carSX6, carSX7, carSX8];
+  var carsX = [carX1, carX2, carX3, carX4, carX5, carX6, carX7, carX8];
+  var carsY = [carY1, carY2, carY3, carY4, carY5, carY6, carY7, carY8];
 
   for (i = 0; i < carsX.length; i++) {
     ctx.drawImage(car, carsSX[i], 0, 60, 35, carsX[i], carsY[i], carWidth, carHeight);
   }
+}
 
+// function to move cars around the streets
 
+// X1,X2,X3 && X6 are cars on the first two lines
+
+function moveCars () {
   if (carX1 < canvas.width + 100) {
     carX1 = carX1 +5;
   }
@@ -185,6 +204,33 @@ function drawCars () {
     carX2 = -100;
     carSX2 = (Math.floor(Math.random() *4)) *60;
   }
+
+  if (carX3 < canvas.width + 100) {
+    carX3 = carX3 +5;
+  }
+  else {
+    carX3 = -100;
+    carSX3 = (Math.floor(Math.random() *4)) *60;
+  }
+
+  if (carX6 < canvas.width + 100) {
+    carX6 = carX6 +5;
+  }
+  else {
+    carX6 = -100;
+    carSX6 = (Math.floor(Math.random() *4)) *60;
+  }
+
+// X4,X5,X7 && X8 are cars on the second two lines in reversed direction
+
+ if (carX4 > -100) {
+   carX4 = carX4 -5;
+ }
+ else {
+   carX4 = canvas.width + 100;
+   carSX4 = (Math.floor(Math.random() *4)) *60;
+ }
+
 }
 
 // function to implement collision
@@ -212,6 +258,7 @@ function draw () {
   drawFrog();
   moveFrog();
   drawCars();
+  moveCars();
   runOver();
   requestAnimationFrame(draw);
 }
