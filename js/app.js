@@ -231,14 +231,38 @@ function moveCars () {
    carSX4 = (Math.floor(Math.random() *4)) *60;
  }
 
+ if (carX5 > -100) {
+   carX5 = carX5 -5;
+ }
+ else {
+   carX5 = canvas.width + 100;
+   carSX5 = (Math.floor(Math.random() *4)) *60;
+ }
+
+ if (carX7 > -100) {
+   carX7 = carX7 -5;
+ }
+ else {
+   carX7 = canvas.width + 100;
+   carSX7 = (Math.floor(Math.random() *4)) *60;
+ }
+
+ if (carX8 > -100) {
+   carX8 = carX8 -5;
+ }
+ else {
+   carX8 = canvas.width + 100;
+   carSX8 = (Math.floor(Math.random() *4)) *60;
+ }
+
 }
 
 // function to implement collision
 
 function runOver () {
 
-  var carsX = [carX1, carX2];
-  var carsY = [carY1, carY2];
+  var carsX = [carX1, carX2, carX3, carX4, carX5, carX6, carX7, carX8];
+  var carsY = [carY1, carY2, carY3, carY4, carY5, carY6, carY7, carY8];
 
   for (i = 0; i < carsX.length; i++) {
     if (carsX[i] <= x + width &&
