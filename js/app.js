@@ -55,9 +55,22 @@ var carX8 = 160;
 var carSX8 = 0;
 var carY8 = 265;
 
+// variables for live Counter
+
+var lives = 3;
+var livesLost = 0;
+
+
 // variable car and linked picture
 
 var car = new Image(); car.src = "froggercars.png";
+
+// variable to set up the goal area
+
+var logX1 = 0;
+var logY1 = 220;
+var logWidth = 570;
+var logHeight = 45;
 
 // set up event listener to listen for a press on a button
 
@@ -257,6 +270,12 @@ function moveCars () {
 
 }
 
+// function to handle game over
+
+function gameOver() {
+  alert("You loose! Wanna play again? Press ok!");
+}
+
 // function to implement collision
 
 function runOver () {
@@ -270,8 +289,29 @@ function runOver () {
     carsY[i] + carHeight >= y &&
     carsY[i] <= y + height) {
       y = 450;
+      lives -= 1;
   }
 }
+}
+
+// function to count lives. Every "crash" with a car makes -1 one life
+
+function drawLives () {
+  if (lives > 0) {
+    ctx.fillStyle ="white";
+    ctx.font = "30px Arial";
+    ctx.fillText("Lives: " + (lives-livesLost), (canvas.width/2)-70, 525);
+  } else {
+    gameOver();
+    window.location.reload();
+  }
+}
+
+// function to draw rectangle which the frog will need to reach in order to win
+
+function drawLogs() {
+  ctx.fillStyle = "tan";
+  ctx.fillRect(logX1, logY1, logWidth, logHeight);
 }
 
 // function to call drawBackground
@@ -279,11 +319,13 @@ function runOver () {
 function draw () {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawBackground();
+  drawLogs();
   drawFrog();
   moveFrog();
   drawCars();
   moveCars();
   runOver();
   requestAnimationFrame(draw);
+  drawLives();
 }
 draw();
